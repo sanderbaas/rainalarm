@@ -17,6 +17,7 @@ function fix_manifest() {
           manifest.permissions.systemXHR = {
             description: "Fetching data from other domains"
           }
+          delete manifest.orientation;
           fs.writeFileSync(manifestFilename, JSON.stringify(manifest, null, '\t'));
         });
       }

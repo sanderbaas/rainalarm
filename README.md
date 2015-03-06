@@ -22,7 +22,6 @@ RainAlarm uses a number of open source projects to work properly:
 * [PhoneGap] - framework to create mobile apps using standardized web APIs for different
 * [HighCharts] - a charting library written in pure JavaScript
 * [Nominatim] - a tool from OpenStreetmap for reverse geocoding
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
 * [jQuery] - a fast, small, and feature-rich JavaScript library
 
 ### Install
