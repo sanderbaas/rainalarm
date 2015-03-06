@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="nl.implode.regenalarm" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Regenalarm</name>
+    <description>
+        Precipitation forecast for the next two hours in five minute intervals. For every location in the Netherlands.
+    </description>
+    <author email="sander@implode.nl" href="https://github.com/sanderbaas/rainalarm">
+        Sander Baas
+    </author>
+    <content src="index.html" />
+    <preference name="permissions" value="none" />
+    <preference name="orientation" value="default" />
+    <preference name="target-device" value="universal" />
+    <preference name="fullscreen" value="true" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="false" />
+    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="show-splash-screen-spinner" value="false" />
+    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="disable-cursor" value="false" />
+    <preference name="android-minSdkVersion" value="7" />
+    <preference name="android-installLocation" value="auto" />
+
+    <platform name="firefoxos">
+        <hook type="after_compile" src="hooks/firefoxos/fix_manifest.js" />
+    </platform>
+
+    <gap:plugin name="org.apache.cordova.device" />
+    <gap:plugin name="org.apache.cordova.device-motion" />
+    <gap:plugin name="org.apache.cordova.device-orientation" />
+    <gap:plugin name="org.apache.cordova.dialogs" />
+    <gap:plugin name="org.apache.cordova.geolocation" />
+    <gap:plugin name="org.apache.cordova.globalization" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <gap:plugin name="org.apache.cordova.network-information" />
+    <gap:plugin name="org.apache.cordova.splashscreen" />
+
+    <icon src="cordova/cordova_128.png"/>
+    <icon src="cordova/cordova_android_36.png" gap:platform="android" gap:density="ldpi"/>
+    <icon src="cordova/cordova_android_48.png" gap:platform="android" gap:density="mdpi"/>
+    <icon src="cordova/cordova_android_72.png" gap:platform="android" gap:density="hdpi"/>
+    <icon src="cordova/cordova_android_96.png" gap:platform="android" gap:density="xhdpi"/>
+    <icon src="cordova/cordova_bb_80.png" gap:platform="blackberry"/>
+    <icon src="cordova/cordova_bb_80.png" gap:platform="blackberry" gap:state="hover"/>
+    <icon src="cordova/cordova_ios_57.png" gap:platform="ios" width="57" height="57"/>
+    <icon src="cordova/cordova_ios_72.png" gap:platform="ios" width="72" height="72"/>
+    <icon src="cordova/cordova_ios_114.png" gap:platform="ios" width="114" height="114"/>
+    <icon src="cordova/cordova_ios_144.png" gap:platform="ios" width="144" height="144"/>
+    <icon src="cordova/cordova_64.png" gap:platform="webos"/>
+    <icon src="cordova/cordova_48.png" gap:platform="winphone"/>
+    <icon src="cordova/cordova_173.png" gap:platform="winphone" gap:role="background"/>
+    <gap:splash src="cordova/res/screen/android_ldpi_portrait.png.png" gap:platform="android" gap:density="ldpi"/>
+    <gap:splash src="cordova/res/screen/android_mdpi_portrait.png" gap:platform="android" gap:density="mdpi"/>
+    <gap:splash src="cordova/res/screen/android_hdpi_portrait.png" gap:platform="android" gap:density="hdpi"/>
+    <gap:splash src="cordova/res/screen/android_xhdpi_portrait.png" gap:platform="android" gap:density="xhdpi"/>
+    <gap:splash src="cordova/res/screen/blackberry_transparent_300.png" gap:platform="blackberry"/>
+    <gap:splash src="cordova/res/screen/iphone_portrait.png" gap:platform="ios" width="320" height="480"/>
+    <gap:splash src="cordova/res/screen/iphone_retina_portrait.png" gap:platform="ios" width="640" height="960"/>
+    <gap:splash src="cordova/res/screen/ipad_portrait.png" gap:platform="ios" width="768" height="1024"/>
+    <gap:splash src="cordova/res/screen/ipad_landscape.png" gap:platform="ios" width="1024" height="768"/>
+    <gap:splash src="cordova/res/screen/windows_phone_portrait.jpg" gap:platform="winphone"/>
+    <access origin="*" />
+</widget>
