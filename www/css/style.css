@@ -53,6 +53,7 @@ button.show-loc, button.remove-loc, button.current-location {
 input#new-location {
   height: 3.8rem;
   margin: 0;
+  font-size:1.25rem;
   padding: 0px 1.5rem;
   box-sizing: border-box;
   display: inline-block;
