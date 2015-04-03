@@ -14,7 +14,7 @@ I am thinking about adding an option to 'blur' your location by a certain distan
 Third feature I am thinking of is a way of using a (anonymizing) proxy for fetching forecasts from Buienradar, to prevent sharing your location along with your IP-address with them.
 
 ### Version
-2.0.0
+2.1.0
 
 ### Tech
 
