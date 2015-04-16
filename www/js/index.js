@@ -431,8 +431,23 @@ function draw(data, description) {
       name: description,
       data: data,
       color: '#B2F2FF'
-    }]
+    }],
+    noData: {
+    style: {
+      fontWeight: 'bold',
+      fontSize: '15px',
+      color: '#333'
+      }
+    }
   });
+
+  chart.hideNoData();
+
+  if (data.every(function(element, index, array) {
+    return Math.round(10*element[1]) == 0;
+  })) {
+    chart.showNoData(navigator.mozL10n.get("no-rain"));
+  }
 }
 
 function showNotification(message) {
