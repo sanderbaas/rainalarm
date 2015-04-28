@@ -140,10 +140,10 @@ function alerter(message, alertCallback, title, buttonName) {
 }
 
 function toggleSideMenu() {
-  var gotoWidth = "+=30rem";
-  if ($('#sidemenu').width() > 0) { gotoWidth = "0rem"; }
+  var gotoLeft = "0rem";
+  if (parseInt($('#sidemenu').css('left')) == 0) { gotoLeft = "-30rem"; }
   $('#sidemenu').animate({
-    width: gotoWidth
+    left: gotoLeft
   }, 500, function() { });
 }
 
