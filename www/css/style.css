@@ -59,6 +59,59 @@ input#new-location {
   display: inline-block;
 }
 
-span.infoText {
-  
+text.titleName {
+  fill:red;
+}
+
+.locationTitle {
+  font-size:1.5em;
+  font-weight:bold;
+}
+
+.windBft {
+  font-size:1.5em;
+}
+
+.windIcon {
+  font-size:2em;
+}
+
+.weatherIcon {
+  font-size:1.5em;
+}
+
+.temp {
+  font-size:1.5em;
+}
+
+.noRain {
+  font-size:1.5em;
+}
+
+.c3-ygrid-line.line-light-rain line {
+    stroke: #FDFF00;
+}
+
+.c3-ygrid-line.line-light-rain text {
+    fill: #000000;
+}
+
+.c3-ygrid-line.line-medium-rain line {
+    stroke: #ff4e00;
+}
+
+.c3-ygrid-line.line-medium-rain text {
+    fill: #000000;
+}
+
+.c3-ygrid-line.line-heavy-rain line {
+    stroke: #B90000;
+}
+
+.c3-ygrid-line.line-heavy-rain text {
+    fill: #000000;
+}
+
+.c3-tooltip .name {
+  display: none;
 }
