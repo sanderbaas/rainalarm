@@ -35,23 +35,52 @@ footer { margin-top: -4rem; height:4rem;}
 
 #sidemenu ul li {
   display:block;
-  padding:1.5rem;
+  padding:0;
   float:left;
   width:100%;
+  padding:1em;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   border-bottom: 0.1rem solid #596068;
 }
 
-button.add-location {
-  width:5rem;
+span.add-location {
+  display:block;
+  float:right;
   margin-top:1rem;
+  font-size:2em;
+  color:#fff;
+  margin-left:1em;
 }
 
-button.show-loc, button.remove-loc, button.current-location {
-  width:auto;
+span.show-loc {
+  display:block;
+  float:left;
+  width:80%;
+  font-size:1.5em;
+}
+
+span.remove-loc {
+  font-family:"FontAwesome";
+  font-size:2em;
+  display:block;
+  float:right;
+  margin-left:1em;
+}
+
+span.current-location {
+  font-size:1.5em;
+}
+
+span.current-location i {
+  font-size:1.5em;
+  margin-right:0.5em;
 }
 
 input#new-location {
   height: 3.8rem;
+  width:80%;
   margin: 0;
   font-size:1.25rem;
   padding: 0px 1.5rem;

@@ -9,12 +9,12 @@ function initialize () {
     // fetch localStorage
     locations = JSON.parse(window.localStorage.getItem('locations')) || [];
 
-    $(document).on('click','button.remove-loc', function(){
+    $(document).on('click','span.remove-loc', function(){
       removeLoc($(this).data('id'));
       $(this).closest('li').remove();
     });
 
-    $(document).on('click','button.show-loc', function(){
+    $(document).on('click','span.show-loc', function(){
       var lat = $(this).data('lat');
       var lon = $(this).data('lon');
       var desc = $(this).data('desc');
@@ -70,7 +70,7 @@ function initialize () {
           alerter(navigator.mozL10n.get("timeout-location-message"));
         };
 
-        var timeoutGeo = window.setTimeout(timeoutLocation, 10000);
+        var timeoutGeo = window.setTimeout(timeoutLocation, 60000);
 
         navigator.geolocation.getCurrentPosition(function (position) {
           window.clearTimeout(timeoutGeo);
@@ -193,7 +193,7 @@ function getDefaultLoc() {
 }
 
 function addLocElement(loc) {
-  var locLi = $('#locs').append('<li class="loc"><h2>'+loc.desc+'</h2><button class="show-loc" data-id="'+loc.id+'" data-lat="'+loc.lat+'" data-lon="'+loc.lon+'" data-desc="'+loc.desc+'">'+navigator.mozL10n.get("button-show")+'</button> <button class="remove-loc" data-id="'+loc.id+'">'+navigator.mozL10n.get("button-remove")+'</button></li>');
+  var locLi = $('#locs').append('<li class="loc"><span class="show-loc" data-id="'+loc.id+'" data-lat="'+loc.lat+'" data-lon="'+loc.lon+'" data-desc="'+loc.desc+'">'+loc.desc+'</span> <span class="remove-loc" data-id="'+loc.id+'">\uf014</span></li>');
 }
 
 function getCoords(query, cb) {
