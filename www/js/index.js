@@ -589,6 +589,7 @@ function showNotification(message) {
 }
 
 function run (loc){
+  $('html, body').animate({ scrollTop: 0 }, 'slow');
   toggleWaiter(true);
   var location = loc || getDefaultLoc();
 
