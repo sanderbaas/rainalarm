@@ -119,6 +119,7 @@ text.titleName {
 
 .c3-ygrid-line.line-light-rain line {
     stroke: #FDFF00;
+	stroke-width:1.3;
 }
 
 .c3-ygrid-line.line-light-rain text {
@@ -127,6 +128,7 @@ text.titleName {
 
 .c3-ygrid-line.line-medium-rain line {
     stroke: #ff4e00;
+	stroke-width:1.3;
 }
 
 .c3-ygrid-line.line-medium-rain text {
@@ -135,6 +137,7 @@ text.titleName {
 
 .c3-ygrid-line.line-heavy-rain line {
     stroke: #B90000;
+	stroke-width:1.3;
 }
 
 .c3-ygrid-line.line-heavy-rain text {
@@ -143,4 +146,8 @@ text.titleName {
 
 .c3-tooltip .name {
   display: none;
+}
+
+.c3 .c3-axis-x line, .c3 .c3-axis-x path {
+  stroke:#606060;
 }

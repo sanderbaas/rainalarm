@@ -356,7 +356,7 @@ function draw(data, description, weather) {
   var chart = c3.generate({
     bindto: '#graph',
     padding: {
-      top: 20,
+      top: 60,
       left: 10,
       right: 10
     },
@@ -384,6 +384,7 @@ function draw(data, description, weather) {
           }
         },
         y: {
+          padding: { top: 0 },
           show: false,
           max: Math.max(4, Math.max.apply(Math, precipitation))
         }
@@ -405,6 +406,10 @@ function draw(data, description, weather) {
         value: function (value, ratio, id) {
           return d3.round(value,1) + ' mm/h';
         }
+      },
+      position: function (data, width, height, element) {
+        var gWidth = $('#graph').width();
+        return {top: 10, left: gWidth - width -10}
       }
     }
   });
