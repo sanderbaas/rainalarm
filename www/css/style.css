@@ -54,11 +54,18 @@ span.add-location {
   margin-left:1em;
 }
 
+span.add-location i, #current-location, #menu, .show-loc, #reload {
+  cursor:pointer;
+  cursor:hand;
+}
+
 span.show-loc {
   display:block;
   float:left;
   width:80%;
   font-size:1.5em;
+  cursor:pointer;
+  cursor:hand;
 }
 
 span.remove-loc {
@@ -67,6 +74,8 @@ span.remove-loc {
   display:block;
   float:right;
   margin-left:1em;
+  cursor:pointer;
+  cursor:hand;
 }
 
 span.current-location {
