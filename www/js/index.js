@@ -32,34 +32,43 @@ function initialize () {
     };
 
     var btnAddLocation = document.querySelector("#add-location");
-    var txtNewLocation = document.querySelector("#new-location");
-    if (btnAddLocation) {
-      btnAddLocation.onclick = function () {
-        if (txtNewLocation.value !== '') {
-          // fetch coordinates
-          getCoords(txtNewLocation.value, function(err, lat, lon, desc) {
-            if (err) {
-              if (err.message === 'nothing found') {
-                alerter(navigator.mozL10n.get("location-not-found"));
-                return;
-              }
-
-              alerter(err.message);
+    var addLocationClick = function () {
+      var txtNewLocation = document.querySelector("#new-location");
+      if (txtNewLocation.value !== '') {
+        // fetch coordinates
+        getCoords(txtNewLocation.value, function(err, lat, lon, desc) {
+          if (err) {
+            if (err.message === 'nothing found') {
+              alerter(navigator.mozL10n.get("location-not-found"));
               return;
             }
-            var newLoc = {
-              id: Date.now(),
-              desc: desc,
-              lat: lat,
-              lon: lon
-            };
-            addLocation(newLoc);
-            addLocElement(newLoc);
-            txtNewLocation.value = '';
-          });
-        }
-      };
+
+            alerter(err.message);
+            return;
+          }
+          var newLoc = {
+            id: Date.now(),
+            desc: desc,
+            lat: lat,
+            lon: lon
+          };
+          addLocation(newLoc);
+          addLocElement(newLoc);
+          txtNewLocation.value = '';
+        });
+      }
+    };
+
+    if (btnAddLocation) {
+      btnAddLocation.onclick = addLocationClick;
     }
+
+    $("#new-location").bind("keypress", function(event) {
+      if(event.which == 13) {
+      event.preventDefault();
+          addLocationClick();
+      }
+    });
 
     var btnCurrentLocation = document.querySelector("#current-location");
     if (btnCurrentLocation) {
