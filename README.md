@@ -1,6 +1,6 @@
 # Rain Alarm
 
-Rain Alarm is an app for Firefox OS and Android (maybe more in the future) with which precipitation forecasts are visualized in a graph. For now only locations in The Netherlands are covered via open-data of Buienradar. Forecasts of the next two hours are displayed in five-minute intervals.
+Rain Alarm is a Cordova-based app for Android (maybe more in the future) with which precipitation forecasts are visualized in a graph. For now only locations in The Netherlands are covered via open-data of Buienradar. Forecasts of the next two hours are displayed in five-minute intervals.
 
 It is possible to search a certain location by address, through Nominatim and save it. You can save multiple locations and switch between them. You can also use your current location.
 The forecasts can also be based on your current location, then it is important that the app has access to your location.
@@ -16,7 +16,7 @@ I am thinking about adding an option to 'blur' your location by a certain distan
 Third feature I am thinking of is a way of using a (anonymizing) proxy for fetching forecasts from Buienradar, to prevent sharing your location along with your IP-address with them.
 
 ### Version
-2.2.0
+4.0.0
 
 ### Tech
 
@@ -29,14 +29,14 @@ RainAlarm uses a number of open source projects to work properly:
 * [OpenStreetMap] - a collaborative project to create a free editable map of the world
 
 ### Install
-Download the package from the [Firefox Marketplace] or from [f-droid]. Or install [PhoneGap] and compile and build it yourself.
+Download the package from Google Play, or better yet, from [f-droid]. Or install Cordova and compile and build it yourself.
 
 License
 ----
 
 ISC
 
-Copyright (c) 2015 Sander Baas
+Copyright (c) 2016 Sander Baas
 
 Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 

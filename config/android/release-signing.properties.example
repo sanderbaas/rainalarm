@@ -1,0 +1,3 @@
+storeFile=../../name_of_keystore.keystore
+storeType=jks
+keyAlias=androidkey
