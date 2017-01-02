@@ -458,7 +458,8 @@ function draw(data, description, weather) {
   }
 
   if (data.every(function(element, index, array) {
-    return Math.round(10*element[1]) == 0;
+    var mmZero = Math.pow(10, (-109)/32);
+    return element[1] == mmZero;
   })) {
     var textNoRain = d3.select('svg').append('text')
     .attr('x', 10 )
