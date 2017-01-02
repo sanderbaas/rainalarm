@@ -2,9 +2,13 @@ var locations = [];
 var geoLocation;
 var autoRefreshInterval = 60000;
 var autoRefreshId;
+var useProxy = false;
 
 // Application Constructor
-function initialize () {
+function initialize (attr) {
+  var opts = attr || {};
+  useProxy = opts.use_proxy || false;
+
   navigator.mozL10n.ready(function() {
     // fetch localStorage
     locations = JSON.parse(window.localStorage.getItem('locations')) || [];
@@ -304,7 +308,8 @@ function getCurrentWeather (lat, lon, cb){
 }
 
 function getLiveData (lat, lon, cb) {
-  var url = 'http://gps.buienradar.nl/getrr.php?lat='+lat+'&lon='+lon;
+  var url = useProxy ? 'https://www.implode.nl/proxy' : 'http://gps.buienradar.nl';
+  url += '/getrr.php?lat='+lat+'&lon='+lon;
   var xhr = new XMLHttpRequest();
   xhr.timeout = 3000;
   xhr.open('GET', url, true);
@@ -648,5 +653,5 @@ if (document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://'
   document.addEventListener('pause', pause, false);
 } else {
   // Web page
-  document.onload = initialize();
+  document.onload = initialize({ use_proxy: true });
 }
