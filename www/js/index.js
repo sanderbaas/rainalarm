@@ -3,11 +3,15 @@ var geoLocation;
 var autoRefreshInterval = 60000;
 var autoRefreshId;
 var useProxy = false;
+var proxyBuienradar = false;
+var proxyOpenweathermap = false;
 
 // Application Constructor
 function initialize (attr) {
   var opts = attr || {};
   useProxy = opts.use_proxy || false;
+  proxyBuienradar = opts.proxy_buienradar || false;
+  proxyOpenweathermap = opts.proxy_openweathermap || false;
 
   navigator.mozL10n.ready(function() {
     // fetch localStorage
@@ -281,7 +285,9 @@ function getAddress (lat, lon, cb) {
 }
 
 function getCurrentWeather (lat, lon, cb){
-  var url = 'http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid=fbc3d19917801786e46dbacd55d2ee9c';
+  var url = useProxy && proxyOpenweathermap ? proxyOpenweathermap : 'http://api.openweathermap.org/data/2.5/weather';
+  url += '?lat='+lat+'&lon='+lon+'&appid=fbc3d19917801786e46dbacd55d2ee9c';
+
   var xhr = new XMLHttpRequest({mozSystem: true});
   xhr.timeout = 3000;
   xhr.open('GET', url, true);
@@ -308,8 +314,8 @@ function getCurrentWeather (lat, lon, cb){
 }
 
 function getLiveData (lat, lon, cb) {
-  var url = useProxy ? 'https://www.implode.nl/proxy' : 'http://gps.buienradar.nl';
-  url += '/getrr.php?lat='+lat+'&lon='+lon;
+  var url = useProxy && proxyBuienradar ? proxyBuienradar : 'http://gps.buienradar.nl/getrr.php';
+  url += '?lat='+lat+'&lon='+lon;
   var xhr = new XMLHttpRequest();
   xhr.timeout = 3000;
   xhr.open('GET', url, true);
@@ -653,5 +659,10 @@ if (document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://'
   document.addEventListener('pause', pause, false);
 } else {
   // Web page
-  document.onload = initialize({ use_proxy: true });
+  $.getJSON('config/config.json').always(function(config) {
+    var opts = { use_proxy: true };
+    if (config && config.proxy_buienradar) { opts.proxy_buienradar = config.proxy_buienradar; }
+    if (config && config.proxy_openweathermap) { opts.proxy_openweathermap = config.proxy_openweathermap; }
+    document.onload = initialize(opts);
+  });
 }
