@@ -147,6 +147,18 @@ function alerter(message, alertCallback, title, buttonName) {
   alert(message);
 }
 
+function searchToObject(search) {
+    var pairs = search.substring(1).split("&"),
+        obj = {}, pair;
+
+    for (var i in pairs) {
+        if (pairs[i] === "") continue;
+        pair = pairs[i].split("=");
+        obj[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+    }
+    return obj;
+}
+
 function toggleSideMenu() {
   var gotoLeft = "0rem";
   if (parseInt($('#sidemenu').css('left')) == 0) { gotoLeft = "-30rem"; }
@@ -187,17 +199,35 @@ function getStandardLoc() {
   };
 }
 
-function getDefaultLoc() {
+function getDefaultLoc(cb) {
+  var params = searchToObject(location.search);
+  if (params && params.q) {
+    getCoords(params.q, function(err, lat, lon, desc) {
+      if (!err) {
+        cb({
+          id: Date.now(),
+          desc: desc,
+          lat: lat,
+          lon: lon
+        });
+        return;
+      }
+    });
+  }
+
   if (geoLocation && geoLocation.default && geoLocation.default === true) {
-    return geoLocation;
+    cb(geoLocation);
+    return;
   }
 
   var result;
   locations.forEach(function(loc) {
     if (loc.default === true) { result = loc; return; }
   });
-  if (result) { return result; }
-  return getStandardLoc();
+  if (result) { cb(result); return; }
+
+  cb(getStandardLoc());
+  return;
 }
 
 function addLocElement(loc) {
@@ -206,6 +236,19 @@ function addLocElement(loc) {
 
 function getCoords(query, cb) {
   var url = 'https://nominatim.openstreetmap.org/search?q='+query+'&format=json&addressdetails=1&countrycodes=nl';
+  var cacheLocations = JSON.parse(window.localStorage.getItem('cacheLocations')) || {};
+  var locationCb = function(data){
+    var locName = parseAddress(data);
+    var lat = data.lat;
+    var lon = data.lon;
+    cb(null, lat, lon, locName);
+  }
+
+  if (cacheLocations && cacheLocations[query]) {
+    locationCb(cacheLocations[query]);
+    return;
+  }
+
   var xhr = new XMLHttpRequest({mozSystem: true});
   xhr.open('GET', url, true);
   xhr.onreadystatechange = function () {
@@ -216,10 +259,11 @@ function getCoords(query, cb) {
         return;
       }
       var data = allData[0];
-      var locName = parseAddress(data);
-      var lat = data.lat;
-      var lon = data.lon;
-      cb(null, lat, lon, locName);
+      // add to cache
+      cacheLocations[query] = data;
+      window.localStorage.setItem('cacheLocations', JSON.stringify(cacheLocations));
+
+      locationCb(data);
       return;
     }
   };
@@ -614,24 +658,32 @@ function showNotification(message) {
 function run (loc){
   $('html, body').animate({ scrollTop: 0 }, 'slow');
   toggleWaiter(true);
-  var location = loc || getDefaultLoc();
 
-  getLiveData(location.lat, location.lon, function(err, rainData) {
-    if (err) {
-      showNotification(err);
-      toggleWaiter(false);
-      return;
-    }
-
-    getCurrentWeather(location.lat, location.lon, function(err, weatherData) {
-      var weather = {};
-      if (!err) {
-        weather = convertWeatherData(weatherData);
+  var loadResults = function(location){
+    getLiveData(location.lat, location.lon, function(err, rainData) {
+      if (err) {
+        showNotification(err);
+        toggleWaiter(false);
+        return;
       }
-      draw(rainData, location.desc, weather);
-      toggleWaiter(false);
+
+      getCurrentWeather(location.lat, location.lon, function(err, weatherData) {
+        var weather = {};
+        if (!err) {
+          weather = convertWeatherData(weatherData);
+        }
+        draw(rainData, location.desc, weather);
+        toggleWaiter(false);
+      });
     });
-  });
+  };
+
+  if (loc) {
+    loadResults(loc);
+    return;
+  }
+
+  getDefaultLoc(loadResults);
 }
 
 function initAutoRefresh() {
