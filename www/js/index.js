@@ -5,6 +5,7 @@ var autoRefreshId;
 var useProxy = false;
 var proxyBuienradar = false;
 var proxyOpenweathermap = false;
+var relativePath = false;
 
 // Application Constructor
 function initialize (attr) {
@@ -12,6 +13,7 @@ function initialize (attr) {
   useProxy = opts.use_proxy || false;
   proxyBuienradar = opts.proxy_buienradar || false;
   proxyOpenweathermap = opts.proxy_openweathermap || false;
+  relativePath = opts.relative_path || false;
 
   navigator.mozL10n.ready(function() {
     // fetch localStorage
@@ -202,8 +204,11 @@ function getStandardLoc() {
 function getDefaultLoc(cb) {
   var params = searchToObject(location.search);
   var done = false;
-  if (params && params.q) {
-    getCoords(params.q, function(err, lat, lon, desc) {
+  if (relativePath) {
+    var path = location.pathname.replace(new RegExp('^'+relativePath,'i'),'');
+  }
+  if ((params && params.q) || (relativePath && path !== '')) {
+    getCoords(params.q || path, function(err, lat, lon, desc) {
       if (!err) {
         done = true;
         cb({
@@ -718,6 +723,7 @@ if (document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://'
     var opts = { use_proxy: true };
     if (config && config.proxy_buienradar) { opts.proxy_buienradar = config.proxy_buienradar; }
     if (config && config.proxy_openweathermap) { opts.proxy_openweathermap = config.proxy_openweathermap; }
+    if (config && config.relative_path) { opts.relative_path = config.relative_path; }
     document.onload = initialize(opts);
   });
 }
