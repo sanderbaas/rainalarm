@@ -201,18 +201,20 @@ function getStandardLoc() {
 
 function getDefaultLoc(cb) {
   var params = searchToObject(location.search);
+  var done = false;
   if (params && params.q) {
     getCoords(params.q, function(err, lat, lon, desc) {
       if (!err) {
+        done = true;
         cb({
           id: Date.now(),
           desc: desc,
           lat: lat,
           lon: lon
         });
-        return;
       }
     });
+    if (done) { return; }
   }
 
   if (geoLocation && geoLocation.default && geoLocation.default === true) {
@@ -352,7 +354,7 @@ function getCurrentWeather (lat, lon, cb){
   };
 
   xhr.ontimeout = function (err) {
-    cb('timout');
+    cb('timeout');
   };
   xhr.send();
 }
@@ -385,7 +387,7 @@ function getLiveData (lat, lon, cb) {
   };
 
   xhr.ontimeout = function (err) {
-    cb('timout');
+    cb('timeout rain data');
   };
   xhr.send();
 }
