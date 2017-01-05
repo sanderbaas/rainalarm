@@ -449,15 +449,15 @@ function draw(data, description, weather) {
         y: {
           padding: { top: 0 },
           show: false,
-          max: Math.max(4, Math.max.apply(Math, precipitation))
+          max: Math.max(4.5, Math.max.apply(Math, precipitation))
         }
     },
     grid: {
       y: {
         lines: [
-          {value: 0.3, position: 'start', class: 'line-light-rain', text: navigator.mozL10n.get("light-rain")},
-          {value: 1.3, position: 'start', class: 'line-medium-rain', text: navigator.mozL10n.get("medium-rain")},
-          {value: 2.5, position: 'start', class: 'line-heavy-rain', text: navigator.mozL10n.get("heavy-rain")}
+          {value: 0.1, position: 'start', class: 'line-light-rain', text: navigator.mozL10n.get("light-rain")},
+          {value: 0.5, position: 'start', class: 'line-medium-rain', text: navigator.mozL10n.get("medium-rain")},
+          {value: 4, position: 'start', class: 'line-heavy-rain', text: navigator.mozL10n.get("heavy-rain")}
         ]
       }
     },
