@@ -138,13 +138,13 @@ function initialize () {
 }
 
 function toggleWaiter(visible) {
-  if (visible && !$('#reload').hasClass('spinning')) {
-    $('#reload').addClass('spinning');
+  if (visible && !$('#updateIcon').hasClass('fa-spin')) {
+    $('#updateIcon').addClass('fa-spin');
     return;
   }
 
-  if ($('#reload').hasClass('spinning')) {
-    $('#reload').removeClass('spinning');
+  if ($('#updateIcon').hasClass('fa-spin')) {
+    $('#updateIcon').removeClass('fa-spin');
     return;
   }
 }
