@@ -1,4 +1,5 @@
 var locations = [];
+var currentLocation = false;
 var geoLocation;
 var autoRefreshInterval = 60000;
 var autoRefreshId;
@@ -8,6 +9,7 @@ function initialize () {
   navigator.mozL10n.ready(function() {
     // fetch localStorage
     locations = JSON.parse(window.localStorage.getItem('locations')) || [];
+    currentLocation = JSON.parse(window.localStorage.getItem('currentLocation')) || false;
 
     $(document).on('click','span.remove-loc', function(){
       removeLoc($(this).data('id'));
@@ -107,6 +109,7 @@ function initialize () {
               desc: description,
               default: true
             };
+            saveCurrentLocation(geoLocation);
             run(geoLocation);
           });
         },
@@ -190,7 +193,15 @@ function setDefaultLoc(id) {
   window.localStorage.setItem('locations', JSON.stringify(locations));
 }
 
+function saveCurrentLocation(currLoc) {
+  currentLocation = currLoc;
+  window.localStorage.setItem('currentLocation', JSON.stringify(currLoc));
+}
+
 function getStandardLoc() {
+  if (currentLocation) {
+    return currentLocation;
+  }
   return {
     lat: 52.1100,
     lon: 5.1806,
