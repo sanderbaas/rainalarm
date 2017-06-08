@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="content-security-policy" content="default-src 'self' 'unsafe-inline'; connect-src 'self' https://*.buienradar.nl http://*.buienradar.nl http://api.openweathermap.org https://nominatim.openstreetmap.org">
+    <meta http-equiv="content-security-policy" content="default-src 'self' https://*.buienradar.nl 'unsafe-inline'; connect-src 'self' https://*.buienradar.nl http://*.buienradar.nl http://api.openweathermap.org https://nominatim.openstreetmap.org">
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
@@ -40,10 +40,14 @@
       </div>
         <div id="graph">
         </div>
+        <div id="map">
+          <iframe src="https://gadgets.buienradar.nl/gadget/zoommap/?lat=51.81&lng=4.67361&overname=2&zoom=6&naam=dordrecht&size=2b&voor=1" scrolling=no width="100%" height="100%" frameborder=no></iframe>
+        </div>
       <footer>
         <div role="toolbar">
           <ul>
             <li><button id="reload" class="update"></button></li>
+            <li><div id="toggleMap" class="btn toggleMap"><i id="toggleMapIcon" class="fa fa-map fa-2x" aria-hidden="true"></i></div></li>
           </ul>
         </div>
       </footer>

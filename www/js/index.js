@@ -31,6 +31,25 @@ function initialize () {
       };
     };
 
+    var toggleMap = document.querySelector("#toggleMap");
+    if (toggleMap) {
+      toggleMap.onclick = function () {
+        var divGraph = document.getElementById("graph");
+        var divMap = document.getElementById("map");
+        console.log(divGraph.style,divMap.style);
+        if (divGraph && divMap) {
+          divGraph.style.display = divGraph.style.display == 'none' ? 'block' : 'none';
+          if (divMap.style.display == 'block') {
+            divMap.style.display = 'none';
+            document.getElementById('toggleMapIcon').className = document.getElementById('toggleMapIcon').className.replace('fa-area-chart','fa-map');
+          }else{
+            divMap.style.display = 'block';
+            document.getElementById('toggleMapIcon').className = document.getElementById('toggleMapIcon').className.replace('fa-map','fa-area-chart');
+          }
+        }
+      }
+    }
+
     var btnAddLocation = document.querySelector("#add-location");
     var txtNewLocation = document.querySelector("#new-location");
     if (btnAddLocation) {
