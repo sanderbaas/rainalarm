@@ -4,3 +4,4 @@ platforms
 config/android/*
 #!config/android/release-signing.properties.example
 !config/android/release-signing.properties.example
+www/config
