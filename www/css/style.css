@@ -71,11 +71,11 @@ span.remove-loc {
   margin-left:1em;
 }
 
-span.current-location {
+span.current-location, span.save-current-location {
   font-size:1.5em;
 }
 
-span.current-location i {
+span.current-location i, span.save-current-location i {
   font-size:1.5em;
   margin-right:0.5em;
 }

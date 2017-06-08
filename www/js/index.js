@@ -82,6 +82,19 @@ function initialize () {
       };
     }
 
+    var btnSaveCurrentLocation = document.querySelector("#save-current-location");
+    if (btnSaveCurrentLocation) {
+      btnSaveCurrentLocation.onclick = function () {
+        if (currentLocation) {
+          addLocation(currentLocation);
+          addLocElement(currentLocation);
+        }
+        if (!currentLocation) {
+          alerter(navigator.mozL10n.get("error-no-current-location-message"));
+        }
+      }
+    }
+
     var btnCurrentLocation = document.querySelector("#current-location");
     if (btnCurrentLocation) {
       btnCurrentLocation.onclick = function () {
